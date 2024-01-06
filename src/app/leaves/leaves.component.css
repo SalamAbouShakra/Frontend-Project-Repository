@@ -1,0 +1,67 @@
+/* leaves.component.css */
+:host {
+    display: block;
+    padding: 20px;
+}
+
+ngx-datatable {
+    width: 100%;
+}
+
+
+/* leaves.component.css */
+
+/* Apply some margin to the top */
+.container {
+    margin-top: 20px;
+}
+
+/* Style the row of input fields */
+.row {
+    margin-bottom: 20px;
+}
+
+/* Style the button */
+.btn-primary {
+    margin-top: 10px;
+}
+
+/* Add some spacing below the ngx-datatable */
+.material {
+    margin-top: 20px;
+}
+
+/* Add more styles as needed */
+
+.datatable-row-white {
+    background-color: white;
+}
+
+.datatable-row-grey {
+    background-color: #f0f0f0; /* Light grey color */
+}
+
+.datatable-cell {
+    border: 1px solid #ddd; /* Light grey border */
+}
+
+.center-content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+}
+
+.datatable-header {
+    text-align: center;
+    border: 1px solid #ddd; /* Adjust the border style as needed */
+}
+
+.datatable-header-name {
+    padding: 10px;
+}
+
+.custom-page-input {
+  max-width: 44px;
+  margin-top: 10px;
+}

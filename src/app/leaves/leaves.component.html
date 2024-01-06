@@ -1,0 +1,77 @@
+<!-- leaves.component.html -->
+
+<div class="container mt-3">
+  <div class="row">
+    <div class="col-md-6">
+      <div class="input-group">
+<!--        <label for="page" class="me-2">Page:</label>-->
+        <button class="btn btn-primary" (click)="decrementPage()">
+          &lt; <!-- Previous button ("<") -->
+        </button>
+        <input
+          type="number"
+          class="form-control form-control-sm custom-page-input"
+          id="page"
+          [(ngModel)]="page"
+          (input)="getLeaves()"
+        />
+        <button class="btn btn-primary" (click)="incrementPage()">
+          &gt; <!-- Next button (">") -->
+        </button>
+      </div>
+    </div>
+    <div class="col-md-2">
+      <label for="size">Size:</label>
+      <input type="number" class="form-control form-control-sm" id="size" [(ngModel)]="size" (input)="onSizeChange()" />
+    </div>
+    <div class="col-md-4 d-flex align-items-end">
+<!--      <button class="btn btn-primary me-2" (click)="getLeaves()">-->
+<!--        Get Leaves-->
+<!--      </button>-->
+      <button class="btn btn-primary" (click)="openAddLeaveModal()">Add Leave</button>
+    </div>
+  </div>
+
+  <!-- Add ngx-datatable here -->
+  <ngx-datatable
+    class="material"
+    [rows]="leaves"
+    [columns]="columns"
+    [columnMode]="'force'"
+    [headerHeight]="50"
+    [footerHeight]="50"
+    [rowHeight]="'auto'"
+    [externalPaging]="true"
+    [count]="leaves.length"
+    [offset]="page"
+    [limit]="size"
+    (page)="onPageChange($event)"
+  >
+    <ngx-datatable-column *ngFor="let col of columns" [name]="col.name" [prop]="col.prop">
+      <ng-template let-column="column" ngx-datatable-header-template>
+        <div class="datatable-header">
+          <div class="datatable-header-name">
+            {{ column.name }}
+          </div>
+        </div>
+      </ng-template>
+      <ng-template let-rowIndex="rowIndex" let-row="row" let-value="value" ngx-datatable-cell-template>
+        <div class="datatable-cell" [class.datatable-row-white]="rowIndex % 2 !== 0" [class.datatable-row-grey]="rowIndex % 2 === 0">
+          <div class="center-content">
+            {{ value }}
+          </div>
+        </div>
+      </ng-template>
+    </ngx-datatable-column>
+
+  </ngx-datatable>
+
+
+
+  <app-add-leave-modal
+          *ngIf="isAddLeaveModalOpen"
+          (leaveAdded)="handleLeaveAdded()"
+          (closeModal)="closeAddLeaveModal()"
+  ></app-add-leave-modal>
+
+</div>

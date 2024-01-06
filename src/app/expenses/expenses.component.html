@@ -1,0 +1,76 @@
+<!-- expenses.component.html -->
+
+<div class="container mt-3">
+  <div class="row">
+    <div class="col-md-2">
+      <div class="form-group">
+        <label for="pageSize">Page Size:</label>
+        <input type="number" class="form-control" id="pageSize" [(ngModel)]="pageSize" />
+      </div>
+    </div>
+    <div class="col-md-2">
+      <div class="form-group">
+        <label for="currentPage">Current Page:</label>
+        <div class="input-group">
+          <button class="btn btn-primary" (click)="decrementPage()"> &lt; </button>
+          <input
+            type="number"
+            class="form-control"
+            id="currentPage"
+            [(ngModel)]="currentPage"
+          />
+          <button class="btn btn-primary" (click)="incrementPage()"> &gt; </button>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-12 mt-5">
+<!--      <button class="btn btn-primary mb-3" (click)="getExpenseClaims()">Get Claims</button>-->
+      <ngx-datatable
+        class="material"
+        [rows]="getDisplayedClaims()"
+        [columns]="columns"
+        [columnMode]="'force'"
+        [headerHeight]="50"
+        [footerHeight]="50"
+        [rowHeight]="28"
+        [externalPaging]="false"
+        [count]="totalElements"
+        [offset]="currentPage"
+        [limit]="pageSize"
+        (page)="onPageChange($event)"
+
+
+      >
+        <ngx-datatable-column *ngFor="let col of columns" [name]="col.name" [prop]="col.prop">
+          <ng-template let-column="column" ngx-datatable-header-template>
+            <div class="datatable-header" >
+              <div class="datatable-header-name">
+                {{ column.name }}
+              </div>
+            </div>
+          </ng-template>
+          <ng-template let-rowIndex="rowIndex" let-row="row" let-value="value" ngx-datatable-cell-template>
+            <div class="datatable-cell" [class.datatable-row-white]="rowIndex % 2 !== 0" [class.datatable-row-grey]="rowIndex % 2 === 0">
+              <div class="center-content">
+                {{ value }}
+              </div>
+            </div>
+          </ng-template>
+        </ngx-datatable-column>
+        <ngx-datatable-column >
+          <ng-template let-row="row" ngx-datatable-cell-template>
+            <button class="btn btn-link" [routerLink]="['/main/expense-claim-entries', row.id]" routerLinkActive="active">View Entries</button>
+          </ng-template>
+        </ngx-datatable-column>
+      </ngx-datatable>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+

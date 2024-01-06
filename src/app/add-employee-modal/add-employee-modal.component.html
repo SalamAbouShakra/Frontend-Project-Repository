@@ -1,0 +1,51 @@
+<!-- add-employee-modal.component.html -->
+
+<div class="modal" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">{{ employee ? '--- Edit' : '--- Add new ' }} Employee: ---</h5>
+        <button type="button" class="btn custom-close-button" aria-label="Close" (click)="cancel()">×</button>
+
+      </div>
+      <div class="modal-body">
+        <form #employeeForm="ngForm" (ngSubmit)="addEmployee(employeeForm)">
+          <!-- Add Employee Form Fields -->
+          <div class="mb-3">
+            <label for="name" class="form-label">Name:</label>
+            <input type="text" class="form-control" id="name" name="name" required ngModel placeholder="Name.." [ngModel]="employee?.name">
+          </div>
+          <div class="mb-3">
+            <label for="email" class="form-label">Email:</label>
+            <input type="email" class="form-control" id="email" name="email" required ngModel placeholder="Email.." [ngModel]="employee?.email">
+          </div>
+          <div class="mb-3">
+            <label for="address" class="form-label">Address:</label>
+            <input type="text" class="form-control" id="address" name="address" required ngModel placeholder="Address.." [ngModel]="employee?.address">
+          </div>
+          <div class="mb-3">
+            <label class="form-label">Department:</label>
+            <!-- Replace with your ng-select implementation for Department IDs -->
+            <ng-select
+              [items]="departments"
+              bindLabel="name"
+              bindValue="id"
+              [ngModel]="employee?.departmentId"
+              name="departmentId"
+              required
+              placeholder="Select Department"
+              (ngModelChange)="employee.departmentId = $event"
+            ></ng-select>
+          </div>
+          <!-- Horizontal grey line -->
+          <hr class="my-4 w-100">
+          <!-- Save and Cancel buttons -->
+          <div class="d-flex justify-content-end">
+            <button type="submit" class="btn btn-danger me-2">{{ employee ? 'Edit' : 'Save' }}</button>
+            <button type="button" class="btn btn-danger" (click)="cancel()">Cancel</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

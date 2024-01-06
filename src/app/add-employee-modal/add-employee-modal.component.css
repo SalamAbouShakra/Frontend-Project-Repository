@@ -1,0 +1,19 @@
+.modal {
+  display: block;
+  /* Other styles for the modal */
+}
+
+.custom-close-button {
+  background-color: #E8E8E8; /* Set your desired background color */
+  color: black; /* Set your desired text color */
+
+  border: 2px solid black; /* Set your desired border style */
+  padding: 1px 5px; /* Adjust padding as needed56 */
+  border-radius: 0px; /* Add border-radius for rounded corners */
+}
+
+.custom-close-button:hover {
+  background-color: darkgray; /* Set a different background color on hover */
+  color: white; /* Set a different text color on hover */
+}
+

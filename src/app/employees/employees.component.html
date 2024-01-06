@@ -1,0 +1,75 @@
+<!-- employees.component.html -->
+
+<div class="container">
+  <div class="row align-items-center mt-3">
+
+    <!-- Search box -->
+    <div class="col-md-6">
+<!--      <label for="search" class="form-label">Search:</label>-->
+      <input
+        type="text"
+        class="form-control"
+        id="search"
+        name="search"
+        [(ngModel)]="searchTerm"
+        (input)="updateFilteredEmployees()"
+        placeholder="Search by name or email..."
+        style="width: calc(60% - 10px); margin-right: 10px;"
+      />
+    </div>
+    <div class="col-md-6 text-end">
+      <button class="btn btn-primary" (click)="openAddEmployeeModal()">+ Add Employee</button>
+    </div>
+  </div>
+
+  <table class="table mt-3">
+    <thead>
+    <tr>
+      <th>ID</th>
+      <th>Name</th>
+      <th>Email</th>
+      <th>Address</th>
+      <th>Department</th>
+      <th>Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let employee of filteredEmployees">
+      <td>{{ employee.id }}</td>
+      <td>{{ employee.name }}</td>
+      <td>{{ employee.email }}</td>
+      <td>{{ employee.address }}</td>
+      <td>{{ getDepartmentName(employee.departmentId) }}</td>
+      <td>
+        <!-- Edit and Delete icons from Font Awesome -->
+        <i class="fas fa-pen-to-square" (click)="openEditEmployeeModal(employee)"></i> <!-- Edit icon -->
+        <i class="fa-solid fa-trash-can" (click)="openDeleteEmployeeModal(employee)"></i> <!-- Delete icon -->
+      </td>
+    </tr>
+    </tbody>
+  </table>
+
+  <!-- Add Employee Modal -->
+  <app-add-employee-modal
+    *ngIf="isAddEmployeeModalOpen"
+    (employeeAdded)="handleEmployeeAdded()"
+    (closeModal)="closeAddEmployeeModal()"
+  ></app-add-employee-modal>
+
+  <!-- Delete Employee Modal -->
+  <app-delete-employee-modal
+    *ngIf="isDeleteEmployeeModalOpen"
+    [employee]="selectedEmployeeForDelete"
+    (confirmDelete)="confirmDeleteEmployee()"
+    (closeModal)="closeDeleteEmployeeModal()"
+  ></app-delete-employee-modal>
+
+  <!-- Edit Employee Modal -->
+  <app-add-employee-modal
+    *ngIf="isEditEmployeeModalOpen"
+    [employee]="selectedEmployeeForEdit"
+    (employeeAdded)="confirmEditEmployee($event)"
+    (closeModal)="closeEditEmployeeModal()"
+  ></app-add-employee-modal>
+
+</div>

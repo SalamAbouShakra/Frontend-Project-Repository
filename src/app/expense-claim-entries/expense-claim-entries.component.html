@@ -1,0 +1,32 @@
+<div class="container mt-3">
+  <div class="row">
+    <div class="col-md-12">
+      <h2>Entries for Expense Claim: {{ expenseClaimId }}</h2>
+      <table class="table mt-4">
+        <thead>
+        <tr>
+          <th>ID</th>
+          <th>Date</th>
+          <th>Expense Type ID</th>
+
+          <th>Description</th>
+          <th>Total</th>
+          <!-- Add more columns if needed -->
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let entry of expenseClaimEntries">
+          <td>{{ entry.id }}</td>
+          <td>{{ entry.date | date }}</td>
+          <td>{{ entry.expenseTypeId }}</td>
+
+          <td>{{ entry.description }}</td>
+          <td>{{ entry.total }}</td>
+          <!-- Add more columns if needed -->
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
